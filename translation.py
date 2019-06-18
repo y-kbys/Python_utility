@@ -56,8 +56,8 @@ def main():
         try:
             with open(args.input_file, 'r') as f:
                 input_text = f.read()
-        except IOError:
-            raise FileNotFoundError(f'{args.input_file} : file open error.')
+        except FileNotFoundError as e:
+            print(f'{e.strerror}: {e.filename}')
 
     print('\n---------------------------------------------------------\n')
 

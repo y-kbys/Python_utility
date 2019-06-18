@@ -1,17 +1,17 @@
 #! /Users/ykobayashi/.pyenv/shims/python
-import os
 import argparse
+from pathlib import Path
 
 
 def reduce_spaces(input_file_name):
     if input_file_name is None:
         raise TypeError('入力ファイル名を与えてください')
+    input_file_name = Path(input_file_name).expanduser().resolve()
     try:
-        input_file_name = os.path.expanduser(input_file_name)
-        with open(input_file_name, 'r') as f:
+        with input_file_name.open(mode='r') as f:
             input_text = f.read()
-    except (IOError, TypeError):
-        raise FileNotFoundError(str(input_file_name) + ' : file open error.')
+    except FileNotFoundError as e:
+        print(f'{e.strerror}: {e.filename}')
 
     new_text = input_text.replace('  ', ' ')
     new_text = new_text.replace('\n\n\n', '\n\n')
@@ -25,20 +25,16 @@ def reduce_spaces(input_file_name):
 
 def main():
     parser = argparse.ArgumentParser(description='連続する半角空白文字を一つに置き換える')
-    parser.add_argument('input', nargs='?', default=None, help='入力ファイル')
-    parser.add_argument('--input_file', '-i', nargs='?', default=None, help='入力ファイル')
+    parser.add_argument('input_file', '--input_file', '-i', nargs='?', default=None, help='入力ファイル')
     parser.add_argument('--output_file', '-o', nargs='?', default=None, help='出力ファイル')
 
     args = parser.parse_args()
 
-    input_file_name = args.input_file if args.input_file else args.input
+    input_file_name = args.input_file
 
     result_text = reduce_spaces(input_file_name)
 
-    if args.output_file is None:
-        output_file = input_file_name
-    else:
-        output_file = args.output_file
+    output_file = args.output_file if args.output_file is not None else input_file_name
 
     with open(output_file, 'w') as f:
         f.write(result_text.replace(' }', '}'))
