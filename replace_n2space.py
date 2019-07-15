@@ -1,7 +1,9 @@
 #! /Users/ykobayashi/.pyenv/shims/python
+import argparse
 import os
 import sys
-import argparse
+
+import pyperclip
 
 
 def replace_n2space(input_file_name: str = None):
@@ -34,6 +36,7 @@ def main():
     else:
         print('\n---------------------------------------------------------\n')
         print(result_text + '\n')
+        pyperclip.copy(result_text + '\n')
 
 
 if __name__ == '__main__':
