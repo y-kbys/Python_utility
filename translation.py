@@ -10,7 +10,12 @@ import requests
 from googletrans import Translator
 
 
-def _translate_english(string: str):
+def _translate_english(string: str) -> str:
+    """
+    未使用の関数
+    :param string: 翻訳対象文字列
+    :return: 翻訳後文字列
+    """
     url = 'https://translate.google.com/?hl=ja#en/ja/'
     headers = {"User-Agent": "Chrome/58.0.3029.110"}
     params = {'q': string}
@@ -22,7 +27,12 @@ def _translate_english(string: str):
     return result
 
 
-def _translate_japanese(string: str):
+def _translate_japanese(string: str) -> str:
+    """
+    未使用の関数
+    :param string: 翻訳対象文字列
+    :return: 翻訳後文字列
+    """
     url = 'https://translate.google.co.jp/?hl=en#ja/en/'
     headers = {"User-Agent": "Chrome/58.0.3029.110"}
     params = {'q': string}
@@ -34,7 +44,12 @@ def _translate_japanese(string: str):
     return result
 
 
-def is_japanese(string):
+def is_japanese(string: str) -> bool:
+    """
+    日本語を含むか否かを判定
+    :param string: 判定対象文字列
+    :return: 日本語を含む場合、True
+    """
     for ch in string:
         try:
             name = unicodedata.name(ch)
