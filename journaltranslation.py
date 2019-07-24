@@ -40,6 +40,7 @@ def main():
     input_text = re.sub(r' \[[0-9, ]*\]', '', input_text)
     input_text = re.sub(r'et al.', 'et al', input_text)
     input_text = input_text.replace('. ', '.\n')
+    input_text = input_text.replace('- ', '')
 
     if not input_text:
         exit(0)
