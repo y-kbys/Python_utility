@@ -25,8 +25,8 @@ def reduce_spaces(input_file_name):
 
 def main():
     parser = argparse.ArgumentParser(description='連続する半角空白文字を一つに置き換える')
-    parser.add_argument('input_file', '--input_file', '-i', nargs='?', default=None, help='入力ファイル')
-    parser.add_argument('--output_file', '-o', nargs='?', default=None, help='出力ファイル')
+    parser.add_argument('input_file', help='入力ファイル')
+    parser.add_argument('--output_file', '-o', default=None, help='出力ファイル')
 
     args = parser.parse_args()
 
